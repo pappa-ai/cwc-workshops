@@ -25,7 +25,7 @@ def setup_agent() -> str:
     # workspace, otherwise fails with "Skill cannot reuse an existing display_title".
     
     agent = client.beta.agents.create(
-        name="SRE Agent",
+        name="SRE AGENT",
         model="claude-opus-4-8",
         system=SYSTEM,
         tools=TOOLS,
