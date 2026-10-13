@@ -20,10 +20,6 @@ client = anthropic.Anthropic()
 
 @st.cache_resource
 def setup_agent() -> str:
-    skill = client.beta.skills.create(
-        display_title=f"Incident Triage Runbook {uuid.uuid4().hex[:6]}",
-        files=files_from_dir("incident-triage-runbook"),
-    )
     agent = client.beta.agents.create(
         name="SRE Agent",
         model="claude-opus-4-8",
