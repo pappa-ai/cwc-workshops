@@ -22,7 +22,7 @@ client = anthropic.Anthropic()
 def setup_agent() -> str:
     agent = client.beta.agents.create(
         name="SRE Agent",
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         system=SYSTEM,
         tools=TOOLS,
     )
