@@ -24,6 +24,7 @@ def setup_agent() -> str:
         name="SRE Agent",
         model="claude-opus-4-8",
         system=SYSTEM,
+        tools=TOOLS,
     )
     return agent.id
     
