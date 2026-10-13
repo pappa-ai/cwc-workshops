@@ -20,18 +20,13 @@ client = anthropic.Anthropic()
 
 @st.cache_resource
 def setup_agent() -> str:
-    # display_title must be unique per organization, so suffix it the same way
-    # setup_environment() does — a second run, or a second person on the same
-    # workspace, otherwise fails with "Skill cannot reuse an existing display_title".
-    
     agent = client.beta.agents.create(
-        name="SRE AGENT",
-        model="claude-opus-4-8",
+        name="SRE Agent",
+        model="claude-opus-4-7",
         system=SYSTEM,
         tools=TOOLS,
     )
     return agent.id
-    
 
 
 # ── 2. Environment ────────────────────────────────────────────────────────
