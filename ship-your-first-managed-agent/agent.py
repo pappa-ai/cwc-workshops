@@ -24,8 +24,6 @@ def setup_agent() -> str:
         name="SRE Agent",
         model="claude-opus-4-8",
         system=SYSTEM,
-        tools=TOOLS,
-        skills=[{"type": "custom", "skill_id": skill.id, "version": "latest"}],
     )
     return agent.id
     
