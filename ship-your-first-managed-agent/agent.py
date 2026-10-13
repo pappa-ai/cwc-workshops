@@ -17,13 +17,22 @@ client = anthropic.Anthropic()
 
 
 # ── 1. Agent ──────────────────────────────────────────────────────────────
-# What the agent IS: model, system prompt, tools, skills. Create once, reuse forever.
-# Hint: client.beta.skills.create(display_title=..., files=files_from_dir(...))
-#       then client.beta.agents.create(..., skills=[...]). display_title must be
-#       unique per org — suffix it with uuid like setup_environment() does.
+
 @st.cache_resource
 def setup_agent() -> str:
-    raise NotImplementedError
+    skill = client.beta.skills.create(
+        display_title=f"Incident Triage Runbook {uuid.uuid4().hex[:6]}",
+        files=files_from_dir("incident-triage-runbook"),
+    )
+    agent = client.beta.agents.create(
+        name="SRE Agent",
+        model="claude-opus-4-8",
+        system=SYSTEM,
+        tools=TOOLS,
+        skills=[{"type": "custom", "skill_id": skill.id, "version": "latest"}],
+    )
+    return agent.id
+    
 
 
 # ── 2. Environment ────────────────────────────────────────────────────────
